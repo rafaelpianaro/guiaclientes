@@ -5,6 +5,7 @@
     <p v-if='showIdade === false'>Idade: {{ cliente.idade }}</p>
     <p v-else>Usuário escondeu a idade.</p>
     <button @click="mudarCor($event)">Mudar cor</button>
+    <button @click="emitirEvendoDelete">Delete</button>
   </div>
 </template>
 
@@ -23,6 +24,10 @@ export default {
         mudarCor: function($event){
             console.log($event)
             this.isPremium = !this.isPremium
+        },
+        emitirEvendoDelete: function(){
+            console.log('emitindo do filho')
+            this.$emit('meDelete',{idCliente: this.cliente.id,component: this})
         }
     }
 }
