@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <h3>Cadastro</h3>
+    <small class="erro" v-show="deuErro">Campo inválido</small><br>
     <input type="text" placeholder="Nome" v-model="nomeField" /><br>
     <input type="text" placeholder="E-mail" v-model="emailField" /><br>
     <input type="number" placeholder="Idade" v-model="idadeField" /><br>
@@ -20,6 +21,7 @@ export default {
   name: 'App',
   data(){
     return {
+      deuErro: false,
       nomeField: '',
       emailField: '',
       idadeField: 0,
@@ -46,10 +48,15 @@ export default {
   },
   methods: {
     cadastrarUsuario: function(){
-      this.clientes.push({nome: this.nomeField, email: this.emailField, idade: this.idadeField, id: Date.now()})
-      this.nomeField = '',
-      this.emailField = '',
-      this.idadeField = 0
+      if(this.nomeField == '' || this.nomeField == ' ' || this.nomeField.length < 3){
+        this.deuErro = true
+      }else{
+        this.clientes.push({nome: this.nomeField, email: this.emailField, idade: this.idadeField, id: Date.now()})
+        this.nomeField = '',
+        this.emailField = '',
+        this.idadeField = 0.
+        this.deuErro = false
+      }
     }
   }
 }
@@ -63,5 +70,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.erro{
+  color: crimson;
 }
 </style>
