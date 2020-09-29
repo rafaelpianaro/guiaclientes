@@ -1,12 +1,13 @@
 <template>
   <div id="app">
-    <h1>Guia de Clientes</h1>
+    <h3>Cadastro</h3>
+    <input type="text" placeholder="Nome" v-model="nomeField" /><br>
+    <input type="text" placeholder="E-mail" v-model="emailField" /><br>
+    <input type="number" placeholder="Idade" v-model="idadeField" /><br>
+    <button @click="cadastrarUsuario($event)">Cadastrar</button>
     <div v-for="(cliente, index) in clientes" :key="cliente.id">
       <h4>{{ index + 1 }}</h4>
       <Cliente :cliente="cliente"/>
-      <h4>Edição</h4>
-      <input type="text" v-model='cliente.nome' />
-      <input type="text" v-model='cliente.email' />
     </div>
   </div>
 </template>
@@ -19,6 +20,9 @@ export default {
   name: 'App',
   data(){
     return {
+      nomeField: '',
+      emailField: '',
+      idadeField: 0,
       clientes: [
         {
           id: 1,
@@ -26,13 +30,6 @@ export default {
           numero: 56,
           email: "rafaelpianaro@gmail.com",
           idade: 37,
-        },
-        {
-          id: 2,
-          nome: "Maria Maria",
-          numero: 15,
-          email: "maria@gmail.com",
-          idade: 23,
         },
         {
           id: 3,
@@ -46,6 +43,14 @@ export default {
   },
   components: {
     Cliente
+  },
+  methods: {
+    cadastrarUsuario: function(){
+      this.clientes.push({nome: this.nomeField, email: this.emailField, idade: this.idadeField, id: Date.now()})
+      this.nomeField = '',
+      this.emailField = '',
+      this.idadeField = 0
+    }
   }
 }
 </script>
