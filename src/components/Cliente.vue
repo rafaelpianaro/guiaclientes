@@ -5,7 +5,8 @@
     <p v-if='showIdade === false'>Idade: {{ cliente.idade }}</p>
     <p v-else>Usuário escondeu a idade.</p>
     <button @click="mudarCor($event)">Mudar cor</button>
-    <button @click="emitirEvendoDelete">Delete</button>
+    <button @click="emitirEvendoDelete">Deletar</button>
+    <h4>Id Especial: {{ idEspecial }}</h4>
   </div>
 </template>
 
@@ -33,6 +34,11 @@ export default {
     filters: {
         processarEmail(value){
             return value.toUpperCase()
+        }
+    },
+    computed: {
+        idEspecial(){
+            return (this.cliente.email + this.cliente.nome + this.cliente.id).toUpperCase()
         }
     }
 }
