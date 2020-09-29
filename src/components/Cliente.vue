@@ -1,13 +1,10 @@
 <template>
   <div id="cliente">
-    <!-- <input type="text" v-model="nome">
-    <h2>{{nome}}</h2>
-    <h3>Descrição:</h3> -->
-    <h4>Nome: {{ nome }}</h4>
-    <p>{{ descricao }}</p>
-    <p>Número: {{ numero }}</p>
-    <p>Email: {{ email }}</p>
-    <p>Idade: {{ idade }}</p>
+    <h4>Nome: {{ cliente.nome }}</h4>
+    <p>Número: {{ cliente.numero }}</p>
+    <p>Email: {{ cliente.email }}</p>
+    <p v-if='showIdade === true'>Idade: {{ cliente.idade }}</p>
+    <p v-else>Usuário escondeu a idade.</p>
   </div>
 </template>
 
@@ -15,15 +12,12 @@
 export default {
     data() {
         return {
-            // nome: "Rafael Pianaro",
-            numero: "99554 9171",
-            email: "rafaelpianaro@gmail.com",
-            idade: 37,
-            descricao: "Lorem ipsun"
+            showIdade: true
         }
     },
     props: {
-            nome: String
+            nome: String,
+            cliente: Object
         }
 }
 </script>
