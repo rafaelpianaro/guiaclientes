@@ -6,7 +6,7 @@
     <input type="text" placeholder="E-mail" v-model="emailField" /><br>
     <input type="number" placeholder="Idade" v-model="idadeField" /><br>
     <button @click="cadastrarUsuario($event)">Cadastrar</button>
-    <div v-for="(cliente, index) in clientes" :key="cliente.id">
+    <div v-for="(cliente, index) in orderClientes" :key="cliente.id">
       <h4>{{ index + 1 }}</h4>
       <Cliente :cliente="cliente" @meDelete='deletarUsuario($event)'/>
     </div>
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-
+import _ from 'lodash'
 import Cliente from './components/Cliente'
 
 export default {
@@ -29,14 +29,12 @@ export default {
         {
           id: 1,
           nome: "Rafael Pianaro",
-          numero: 56,
           email: "rafaelpianaro@gmail.com",
           idade: 37,
         },
         {
           id: 3,
           nome: "João Maria",
-          numero: 76,
           email: "joaomaria@gmail.com",
           idade: 40,
         }
@@ -54,7 +52,7 @@ export default {
         this.clientes.push({nome: this.nomeField, email: this.emailField, idade: this.idadeField, id: Date.now()})
         this.nomeField = '',
         this.emailField = '',
-        this.idadeField = 0.
+        this.idadeField = 0,
         this.deuErro = false
       }
     },
@@ -65,6 +63,15 @@ export default {
       var novoArray = this.clientes.filter(cliente => cliente.id != id)
       this.clientes = novoArray
       // $event.component.isPremium = true
+    }
+  },
+  computed: {
+    orderClientes(){
+      // var c = this.clientes
+      // console.log('lista',this.clientes)
+      // var c = _.orderBy(this.clientes,['nome'],['asc'])
+      // console.log('ordenado',c)
+      return _.orderBy(this.clientes,['nome'],['asc'])
     }
   }
 }
