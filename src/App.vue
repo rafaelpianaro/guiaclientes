@@ -1,5 +1,9 @@
 <template>
   <div id="app">
+    <div class="buttons">
+      <button class="button is-primary">Primary</button>
+      <button class="button is-link">Link</button>
+    </div>
     <h3>Cadastro</h3>
     <small class="erro" v-show="deuErro">Campo inválido</small><br>
     <input type="text" placeholder="Nome" v-model="nomeField" /><br>
